@@ -5,11 +5,11 @@
 ### 初始化 
 
 ```
-npm install
+  npm install
 ```
 
 ### 启动
 
 ```
-node server
+  node server
 ```
