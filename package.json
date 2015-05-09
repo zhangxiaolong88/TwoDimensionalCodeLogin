@@ -1,0 +1,14 @@
+{
+  "name": "Two-dimensional-code-Login",
+  "version": "0.0.0",
+  "dependencies": {
+    "express": "~3.4.0",
+    "socket.io": "^1.3.5"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}

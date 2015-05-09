@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Two-dimensional-code-Login</title>
+<script type="text/javascript" src="./socket.io.js"></script>
+</head>
+<body>
+	<input type="text" id="username" />
+	<input type="text" id="password" />
+	<input type="button" id="submit" value="提交" />
+	<script type="text/javascript">
+	var ip = "127.0.0.1",
+		port = "8888";
+
+	var socket = io();
+
+	// socket.on("connect", function(data) {
+	// 	console.log("Connected to Server,ip:" + ip + ",port:" + port);
+	// });
+
+	// socket.on("message", function(data) {
+	// 	console.log("readData:" + data);
+	// });
+
+	// socket.on('reconnect', function() {
+	// 	console.log("reconnect to Server,ip:" + ip + ",port:" + port);
+	// });
+
+	document.getElementById("submit").onclick = function(){
+		var username = document.getElementById("username").value;
+		var password = document.getElementById("password").value;
+
+		socket.emit("message", "how are you");
+	}
+
+	socket.on("message", function(data){
+		alert(data);
+	})
+
+	// var xhr = new XMLHttpRequest();
+
+	// xhr.open("GET", "http://localhost:8888/user/login?user=test&password=test", true);
+	// xhr.send();
+
+	// xhr.onreadystatechange = function(){
+	// 	if(xhr.readyState == 4){
+	// 		if(xhr.status == 200){
+	// 			alert(xhr.responseText);
+	// 		}
+	// 	}
+	// };
+	</script>
+	123
+</script>
+</body>
+</html>
+
