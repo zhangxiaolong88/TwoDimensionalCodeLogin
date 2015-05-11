@@ -3,13 +3,13 @@
 
 ###环境配置
 
-1. nodejs 
+####1. nodejs 
 
 ```
 v0.10.26
 ```
 
- 2. mongodb
+####2. mongodb
 
 创建datebase： twoDimensionalCodeLogin
 
