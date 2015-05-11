@@ -37,7 +37,7 @@
 
 本例子中省略了后台生成二维码的步骤，因此采用直接请求接口的方式 替代 移动端用户扫描二维码的动作。
 
-http://localhost：8888/uid/setUser?uid=<上一步记录的UID>&username=test，打开上面请求地址。
+http://localhost:8888/uid/setUser?uid=<上一步记录的UID>&username=test，打开上面请求地址。
 
 查看日志，可视见 客户端 获取到了用户名，之后即可执行登录之后的页面代码。
 
