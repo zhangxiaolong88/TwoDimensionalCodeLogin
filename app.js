@@ -1,9 +1,9 @@
 /*jslint node: true */
 'use strict';
-var express = require('express'),
-	app = express(),
-	path = require('path');
-
+var path = require('path'),
+	mongoose = require('mongoose'),
+	express = require('express'),
+	app = express();
 
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -19,21 +19,13 @@ app.use(app.router);
 // 捕捉错误
 app.use(express.errorHandler());
 
+// 静态文件
 app.use(express.static(path.join(__dirname, './public')));
 
 // 注册路由
-app.get('/user/login', function(req, res) {
-	res.send({
-		state: 1,
-		data: {
-			msg: "hello world"
-		}
-	})
-});
+require("./server/router")(app);
 
-
-app.use(function(req, res) {
-	res.send('404');
-});
+// mongo
+var mongodb = mongoose.connect("mongodb://localhost/twoDimensionalCodeLogin");
 
 module.exports = app;

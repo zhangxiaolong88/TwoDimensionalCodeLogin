@@ -5,52 +5,66 @@
 <script type="text/javascript" src="./socket.io.js"></script>
 </head>
 <body>
-	<input type="text" id="username" />
-	<input type="text" id="password" />
-	<input type="button" id="submit" value="提交" />
+	<input type="button" id="login" value="登录" />
+	<input type="button" id="stop" value="停止" />
 	<script type="text/javascript">
-	var ip = "127.0.0.1",
-		port = "8888";
 
-	var socket = io();
+	function createSocket() {
+		var socket = io();
 
-	// socket.on("connect", function(data) {
-	// 	console.log("Connected to Server,ip:" + ip + ",port:" + port);
-	// });
+		socket.on("connect", function(data) {
+			console.log("Connected to Server");
+		});
 
-	// socket.on("message", function(data) {
-	// 	console.log("readData:" + data);
-	// });
+		// socket.on('reconnect', function() {
+		// 	console.log("reconnect to Server,ip:" + ip + ",port:" + port);
+		// });
 
-	// socket.on('reconnect', function() {
-	// 	console.log("reconnect to Server,ip:" + ip + ",port:" + port);
-	// });
+		socket.on("checked", function(data) {
+			if(data.state == 1 && data.data.username){
+				console.log("user logined: " + data.data.uid + ", username is " + data.data.username);
+				clearInterval(timer);
+			} else if(data.state == 0) {
+				console.log("user checking: " + data.data.uid);
+			}
+		});
 
-	document.getElementById("submit").onclick = function(){
-		var username = document.getElementById("username").value;
-		var password = document.getElementById("password").value;
-
-		socket.emit("message", "how are you");
+		return socket;
 	}
+	
+	function getUid(cb){
+		var xhr = new XMLHttpRequest();
 
-	socket.on("message", function(data){
-		alert(data);
-	})
+		xhr.open("GET", "http://localhost:8888/uid/getUid", true);
+		xhr.send();
 
-	// var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status == 200){
+					var uid = JSON.parse(xhr.responseText).data.uid;
+					console.log(uid);
+					cb(uid);
+				}	
+			}
+		};
+	}
+	
+	var timer;
 
-	// xhr.open("GET", "http://localhost:8888/user/login?user=test&password=test", true);
-	// xhr.send();
+	document.getElementById("login").onclick = function(){
+		getUid(function(uid){
+			var st = createSocket();
 
-	// xhr.onreadystatechange = function(){
-	// 	if(xhr.readyState == 4){
-	// 		if(xhr.status == 200){
-	// 			alert(xhr.responseText);
-	// 		}
-	// 	}
-	// };
+			timer = setInterval(function(){
+				st.emit("check", {uid: uid});
+			}, 3000);
+		});
+	};
+	document.getElementById("stop").onclick = function(){
+		clearInterval(timer);
+	}
+	
 	</script>
-	123
 </script>
 </body>
 </html>
