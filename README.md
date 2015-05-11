@@ -9,7 +9,7 @@
 v0.10.26
 ```
 
-2. mongodb
+ 2. mongodb
 
 创建datebase： twoDimensionalCodeLogin
 
