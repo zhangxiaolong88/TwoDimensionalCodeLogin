@@ -22,8 +22,10 @@
 
 		socket.on("checked", function(data) {
 			if(data.state == 1 && data.data.username){
-				console.log("user logined: " + data.data.uid + ", username is " + data.data.username);
 				clearInterval(timer);
+				console.log("user logined: " + data.data.uid + ", username is " + data.data.username);
+				// 之后 执行 登录时页面渲染的代码
+				// ...
 			} else if(data.state == 0) {
 				console.log("user checking: " + data.data.uid);
 			}

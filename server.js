@@ -17,6 +17,9 @@ io.on('connection', function(socket) {
 			// 如果该uid绑定了用户 则返回登录成功的状态
 			if (data.username) {
 				console.log("user logined: " + obj.uid + ", username is " + data.username);
+				// session中保存用户信息
+				req.session.username = username;
+				// 响应client 可以执行登录的代码了
 				socket.emit("checked", {
 					state: 1,
 					data: {
