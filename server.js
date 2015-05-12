@@ -1,7 +1,7 @@
 var app = require("./app"),
 	http = require("http").createServer(app),
 	io = require('socket.io')(http),
-	model = require("./server/mongoModel");;
+	model = require("./server/mongoModel");
 
 io.on('connection', function(socket) {
 	console.log('a user connected');
@@ -41,8 +41,6 @@ io.on('connection', function(socket) {
 	});
 });
 
-
-
 http.listen("8888", function() {
 	console.log("server is listen on port 8888.");
-})
+});
