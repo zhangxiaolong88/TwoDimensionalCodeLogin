@@ -41,24 +41,20 @@ module.exports = function(app) {
 	 * @param username<string>
 	 */
 	app.get('/uid/setUser', function(req, res) {
-		var uid = new UidModel({
-			_id: req.query.uid,
-			username: req.query.username
-		});
-
-		UidModel.findOne({
+		UidModel.update({
 			_id: req.query.uid
-		}, function(err,data){
-			data.username = req.query.username;
-			data.save(data, function(err, data){
-				res.send({
-					state: 1,
-					data: {
-						msg: "success"
-					}
-				});
+		}, {
+			$set: {
+				username: req.query.username
+			}
+		}, {}, function(err, docs) {
+			res.send({
+				state: 1,
+				data: {
+					msg: "success"
+				}
 			});
-		})
+		});
 	});
 
 
